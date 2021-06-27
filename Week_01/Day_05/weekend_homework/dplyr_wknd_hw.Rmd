@@ -1,0 +1,202 @@
+---
+title: "`dplyr` Weekend Homework"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+    css: ../../../styles.css
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
+```
+<br>
+
+
+
+As this is your first weekend homework, here are some tips: 
+
+* Try to schedule some time in your weekend to work on the homework so it's not suddenly Monday morning and you haven't gotten started yet (it happens).
+* Remember that the weekend homework is for your learning, so try to use it as an opportunirything you've learned in the week.
+* Also use it as an opportunity to spend a bit more time making your code readable and reproducible, by practising commenting and writing some text around your steps and findings. You will thank yourself later! 
+  * This will be especially useful for this specific weekend homework as it's very open-ended and you will eventually forget your own thought process
+* A bit obvious, but don't spend your entire weekend working on the homewty to apply and consolidate eveork! Remember to spend time doing things you enjoy and rest up ahead of the following week.
+
+The data for this weekend homework is scraped from Goodreads (a website all about books) and made publicly available on Kaggle. You can read more about the data [here](https://www.kaggle.com/jealousleopard/goodreadsbooks).
+
+# MVP
+
+### First steps
+
+Load necessary packages and read in `books.csv`. Investigate dimensions, variables, missing values - you know the drill!
+```{r}
+library(tidyverse)
+books <- read_csv("data/books.csv", 
+                  quote = "")
+
+dim(books)
+
+view(books)
+
+sum(is.na(books))
+```
+
+### Up to you
+
+Now it's up to you... For this weekend homework there will be no specific tasks, just you and this dataset! Using everything you've learned this week, try to describe/summarise at least 5 things about this dataset - using R and the tidyverse of course! Feel free to find and use new functions if there is something that the tidyverse doesn't offer, but do try to use this homework to apply what you have learned this week. Be prepared to share one of your findings on Monday!
+
+
+
+
+
+Things I'm planning to do:
+
+- select fewer columns to hone in on the more important ones
+
+- rename a column for a laugh
+
+- Impute NAs for ratings based on the median rating
+
+- create a column rating movies good, bad and average based on their rating
+
+- see if I can work out how to compare the average number of pages to the book 
+rating
+
+
+# select
+
+```{r}
+books_refined <- books %>%
+  select(title, authors, average_rating, num_pages, ratings_count)
+
+view(books_refined)
+```
+
+# renaming a column 
+
+```{r}
+books_refined <- books_refined %>%
+  rename("pages" = "num_pages")
+view(books_refined)
+```
+
+# imputing averages where NA's occur in average_rating
+
+```{r}
+books_refined <- books_refined %>%
+  mutate(average_rating = coalesce(
+    average_rating, median(
+      average_rating, na.rm = TRUE)))
+
+books_refined %>% 
+  summarise(count = sum(is.na(average_rating)))
+```
+
+# adding column giving a character value to the movies quality
+
+```{r}
+books_refined <- books_refined %>% 
+  mutate(
+    book_quality = case_when(average_rating < 3 ~ "Bad",
+                              average_rating < 4 ~ "Average",
+                              average_rating >= 4 ~ "Good"))
+
+view(books_refined)
+```
+
+# imputing median values for pages for comparison's purpose
+
+
+```{r}
+books_refined <- books_refined %>%
+  mutate(pages = coalesce(
+    pages, median(
+      pages, na.rm = TRUE)))
+
+books_refined %>% 
+  summarise(count = sum(is.na(pages)))
+
+view(books_refined)
+```
+
+# trying to see if there is a correlation between book length and quality by 
+  adding a column defining length in character form.
+  
+```{r}
+books_refined <- books_refined %>% 
+  mutate(
+    book_length = case_when(pages < 300 ~ "Short",
+                              pages < 500 ~ "Medium",
+                              pages >= 500 ~ "Long"))
+
+view(books_refined)
+```
+  
+
+# checking for correlation between book length and book quality.
+
+```{r}
+books_refined %>%
+  group_by(book_quality, book_length) %>%
+summarise(comparison_between_length_quality = n())
+```
+
+Upon review I should've calculated the values I assigned the book_length and
+book_quality more closely, but according to my summary, there aren't many books
+that are bad, which is nice I suppose...
+
+There doesn't seem to be much of a correlation at all between book quality and 
+length.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Remember
+
+Before you submit, go through your weekend homework and make sure your code is following best practices as laid out in the `coding_best_practice` lesson.
