@@ -59,10 +59,10 @@ transation_fraud <- full_join(fraud_base, transaction_base)
 
 Join the data containing card details with transaction details so rows from the first which have matching ones in the second are returned, but only return rows in the first table once.
 
-# wording of the question confused me, tried several types of join but noot quite sure what's being asked of me.
+# wording of the question confused me, tried several types of join but not quite sure what's being asked of me.
 
 ```{r}
-left_join(card_base, transaction_base, by = c("card_number" = "credit_card_id"))
+semi_join(card_base, transaction_base, by = c("card_number" = "credit_card_id"))
 ```
 
 ## `tidyr`
