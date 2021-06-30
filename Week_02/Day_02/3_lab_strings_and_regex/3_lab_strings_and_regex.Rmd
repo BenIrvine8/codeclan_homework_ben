@@ -143,16 +143,18 @@ library(tidyverse)
 1. Are the Thought Police ever mentioned?
 
 ```{r}
-pattern <- "[Tt]hought [Pp]olice"
+pattern <- "[Tt]hought +[Pp]olice"
 whole_text %>%
   str_detect(pattern)
 ```
 
 2. Count how often Big Brother is mentioned
 ```{r}
-pattern <- "[Bb]ig [bB]rother"
+pattern <- regex("big +brother", ignore_case = TRUE)
 whole_text %>%
-  str_extract_all(pattern) 
+  str_extract_all(pattern) %>%
+  flatten_chr() %>%
+  length() 
 ```
 There's 12 
 
@@ -183,32 +185,27 @@ whole_text %>%
 6. Stocks of Victory Gin have run out and the people of Oceania will have to drink vodka instead. Replace "gin" with "vodka", matching case wherever possible. There's still loads of Victory Coffee, though, so don't replace that.
 
 ```{r}
+pattern <- "[ ,.-][gG][iI][nN][ ,.-]"
+
 whole_text %>%
-  str_extract_all("[Gg]in")
-
-
-
-pattern <- "Gin"
+str_extract_all(pattern) %>%
+  flatten_chr()
 
 whole_text_vodka <- whole_text %>%
-str_replace_all(pattern, "vodka")
- 
+  str_replace_all(" GIN.", " VODKA.") %>%
+  str_replace_all(" gin.", " vodka.") %>%
+  str_replace_all(" gin ", " vodka ")
+
 ```
 
 7. Big Brother is rebranding and has decided that the various ministries will now be known as departments. The old departments are now called sections. The Newspeak titles will use "Dep" instead of "Mini".
 
 ```{r}
-pattern_mini <- "[Mm]ini"
-pattern_m <- "[Mm]inistry"
-pattern_ms <- "[Mm]inistries"
-pattern_ds <- "[Dd]epartment"
-
-
-whole_text_renamed <- whole_text_vodka %>%
-str_replace_all(pattern_mini, "Dep") %>%
-  str_replace_all(pattern_m, "Department") %>%
-   str_replace_all(pattern_ms, "Departments") %>%
-    str_replace_all(pattern_ds, "Sections") 
+whole_text_replaced <- whole_text_vodka %>%
+  str_replace_all("Department", "Section") %>%
+  str_replace_all("Ministry", "Department") %>%
+  str_replace_all("Ministrie", "Department") %>%
+  str_replace_all("Mini", "Dep")
 ```
 
 # Hints
