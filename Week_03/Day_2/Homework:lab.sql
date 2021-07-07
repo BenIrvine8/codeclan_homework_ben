@@ -67,9 +67,29 @@ ORDER BY num_employees ASC;
 /*Q4*/
 SELECT 
 t.id, 
-t.name
-FROM teams AS t LEFT JOIN employees AS e 
+t.name,
+COUNT(e.id)
+FROM employees AS e INNER JOIN teams AS t 
 ON t.id = e.team_id
-(SELECT COUNT(t.name)
-GROUP BY t.name;
-)
+GROUP BY t.id;
+
+/*Q4b*/
+
+SELECT 
+  t.name,
+  COUNT(e.id) * CAST(t.charge_cost AS INT) AS total_day_charge
+FROM employees AS e
+INNER JOIN teams AS t
+ON e.team_id = t.id
+GROUP BY t.id;
+
+/*Q4c*/
+
+SELECT 
+  t.name,
+  COUNT(e.id) * CAST(t.charge_cost AS INT) AS total_day_charge
+FROM employees AS e
+INNER JOIN teams AS t
+ON e.team_id = t.id
+GROUP BY t.id
+HAVING COUNT(e.id) * CAST(t.charge_cost AS INT) > 5000;
