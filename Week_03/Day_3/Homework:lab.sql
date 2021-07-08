@@ -119,12 +119,18 @@ ORDER BY no_name DESC, department ASC;
 /*Q15*/
 
 SELECT 
-COUNT(id) AS name_count
-FROM employees 
-WHERE name_count > 1
-ORDER BY name_count DESC, first_name;
+  first_name, 
+  COUNT(id) AS name_count
+FROM employees
+WHERE first_name IS NOT NULL
+GROUP BY first_name 
+HAVING COUNT(id) > 1
+ORDER BY COUNT(id) DESC, first_name ASC;
+
 
 /*Q16*/
-
-SELECT 
+SELECT
+ department, 
+  SUM(CAST(grade = '1' AS INT)) / CAST(COUNT(id) AS REAL) AS grade_proportion 
 FROM employees 
+GROUP BY department;
