@@ -94,9 +94,13 @@ Yes, the relationship follows a similar trend.
 What **proportion** of students report back pain?   
 
 ```{r}
+backpack <- backpack %>%
+  mutate(backpain_labelled = recode(back_problems, 
+                       "0" = "No", 
+                       "1" = "Yes"))
 ggplot(backpack) + 
-  aes(x = back_problems) +
- geom_bar()
+  aes(x = "", fill = backpain_labelled) +
+ geom_bar(position = "fill")
 ```
 
 **Question 7.**  
@@ -109,7 +113,8 @@ ggplot(backpack) +
  geom_bar() +
   facet_wrap(~sex)
 ```
-Yes, there are more Women with back problems.
+
+Yes, there are more women with back problems.
 
 **Question 8.**  
 
@@ -118,8 +123,8 @@ Now you've investigated your data separately, create plots to describe the relat
 Try both `backpack_weight` and `body_weight` as well as the `ratio`.   
 ```{r}
 ggplot(backpack) + 
-  aes(x = , y = , colour = ) +
-  geom_col() +
+  aes(x = body_weight, y = backpack_weight, size = back_problems) +
+  geom_point() +
   facet_wrap(~sex)
 ```
 
