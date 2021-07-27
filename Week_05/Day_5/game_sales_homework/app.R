@@ -20,15 +20,12 @@ ui <- fluidPage(radioButtons("graph_input",
 ),
 plotOutput("bar_time")
 )
-
-
 # Server ------------------------------------------------------------------
 server <- function(input, output){
     output$bar_time <- renderPlot({
         if (input$graph_input == "Bar") {print(bar)}  
         if (input$graph_input == "Horizontal Bar") {print(horizontal_bar)}
     })
-
 }
 
 

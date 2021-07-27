@@ -1,0 +1,58 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(prob)
+library(gtools)
+library(tidyverse)
+
+titanic_data <- read_csv("data/titanic.csv")
+
+titanic_data %>%
+  distinct(class)
+
+passenger_data <- titanic_data %>%
+  filter(class == c("3rd", "2nd", "1st"))
+
+crew_data <- titanic_data %>%
+  filter(class == c("engineering crew",			
+                   "victualling crew",			
+                   "restaurant staff",			
+                   "deck crew"))
+```
+
+
+
+```{r}
+crew_data %>%
+  group_by(survived) %>%
+  count()
+
+passenger_data %>%
+  group_by(survived) %>%
+  count()
+```
+
+no = 157, yes = 48 for crew = 76.5% death rate + 23.5% survival rate
+```{r}
+157 / 205
+```
+
+no = 281,	yes	= 169	for passengers = 62.4% death rate + 37.6% survival rate
+
+```{r}
+281/450
+```
+
+You were more probable to die if you were crew.
+
+1) 2/3 chance.
+
+2) 216
+
+```{r}
+three_dice_rolled <- rolldie(3)
+nrow(three_dice_rolled)
+```
+
