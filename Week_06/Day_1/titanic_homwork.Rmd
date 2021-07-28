@@ -13,13 +13,13 @@ titanic_data %>%
   distinct(class)
 
 passenger_data <- titanic_data %>%
-  filter(class == c("3rd", "2nd", "1st"))
+  dplyr::filter(class == c("3rd", "2nd", "1st"))
 
-crew_data <- titanic_data %>%
-  filter(class == c("engineering crew",			
-                   "victualling crew",			
-                   "restaurant staff",			
-                   "deck crew"))
+  crew_data <- titanic_data %>%
+    dplyr::filter(class == c("engineering crew",
+                     "victualling crew",
+                     "restaurant staff",
+                     "deck crew"))
 ```
 
 
@@ -34,18 +34,19 @@ passenger_data %>%
   count()
 ```
 
-no = 157, yes = 48 for crew = 76.5% death rate + 23.5% survival rate
+no = 157, yes = 48 for crew = 76.6% death rate + 23.4% survival rate.
+
 ```{r}
 157 / 205
 ```
 
-no = 281,	yes	= 169	for passengers = 62.4% death rate + 37.6% survival rate
+no = 281,	yes	= 169	for passengers = 62.4% death rate + 37.6% survival rate.
 
 ```{r}
 281/450
 ```
 
-You were more probable to die if you were crew.
+You were more 14.1% more probable to die if you were crew.
 
 1) 2/3 chance.
 

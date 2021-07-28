@@ -217,7 +217,7 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShwcm9iKVxubGlicmFyeShndG9vbHMpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcblxudGl0YW5pY19kYXRhIDwtIHJlYWRfY3N2KFwiZGF0YS90aXRhbmljLmNzdlwiKVxuXG50aXRhbmljX2RhdGEgJT4lXG4gIGRpc3RpbmN0KGNsYXNzKVxuXG5wYXNzZW5nZXJfZGF0YSA8LSB0aXRhbmljX2RhdGEgJT4lXG4gIGZpbHRlcihjbGFzcyA9PSBjKFwiM3JkXCIsIFwiMm5kXCIsIFwiMXN0XCIpKVxuXG5jcmV3X2RhdGEgPC0gdGl0YW5pY19kYXRhICU+JVxuICBmaWx0ZXIoY2xhc3MgPT0gYyhcImVuZ2luZWVyaW5nIGNyZXdcIixcdFx0XHRcbiAgICAgICAgICAgICAgICAgICBcInZpY3R1YWxsaW5nIGNyZXdcIixcdFx0XHRcbiAgICAgICAgICAgICAgICAgICBcInJlc3RhdXJhbnQgc3RhZmZcIixcdFx0XHRcbiAgICAgICAgICAgICAgICAgICBcImRlY2sgY3Jld1wiKSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShwcm9iKVxubGlicmFyeShndG9vbHMpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcblxudGl0YW5pY19kYXRhIDwtIHJlYWRfY3N2KFwiZGF0YS90aXRhbmljLmNzdlwiKVxuXG50aXRhbmljX2RhdGEgJT4lXG4gIGRpc3RpbmN0KGNsYXNzKVxuXG5wYXNzZW5nZXJfZGF0YSA8LSB0aXRhbmljX2RhdGEgJT4lXG4gIGRwbHlyOjpmaWx0ZXIoY2xhc3MgPT0gYyhcIjNyZFwiLCBcIjJuZFwiLCBcIjFzdFwiKSlcblxuICBjcmV3X2RhdGEgPC0gdGl0YW5pY19kYXRhICU+JVxuICAgIGRwbHlyOjpmaWx0ZXIoY2xhc3MgPT0gYyhcImVuZ2luZWVyaW5nIGNyZXdcIixcbiAgICAgICAgICAgICAgICAgICAgIFwidmljdHVhbGxpbmcgY3Jld1wiLFxuICAgICAgICAgICAgICAgICAgICAgXCJyZXN0YXVyYW50IHN0YWZmXCIsXG4gICAgICAgICAgICAgICAgICAgICBcImRlY2sgY3Jld1wiKSlcbmBgYCJ9 -->
 <pre class="r"><code>library(prob)
 library(gtools)
 library(tidyverse)
@@ -228,28 +228,30 @@ titanic_data %&gt;%
   distinct(class)
 
 passenger_data &lt;- titanic_data %&gt;%
-  filter(class == c(&quot;3rd&quot;, &quot;2nd&quot;, &quot;1st&quot;))
+  dplyr::filter(class == c(&quot;3rd&quot;, &quot;2nd&quot;, &quot;1st&quot;))
 
-crew_data &lt;- titanic_data %&gt;%
-  filter(class == c(&quot;engineering crew&quot;,         
-                   &quot;victualling crew&quot;,          
-                   &quot;restaurant staff&quot;,          
-                   &quot;deck crew&quot;))</code></pre>
+  crew_data &lt;- titanic_data %&gt;%
+    dplyr::filter(class == c(&quot;engineering crew&quot;,
+                     &quot;victualling crew&quot;,
+                     &quot;restaurant staff&quot;,
+                     &quot;deck crew&quot;))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImdyb3VwZWRfZGYiLCJ0YmxfZGYiLCJ0YmwiLCJkYXRhLmZyYW1lIl0sIm5yb3ciOjIsIm5jb2wiOjIsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMiB4IDIiXSwiR3JvdXBzIjpbInN1cnZpdmVkIFsyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUExMVFVVzdDTUF4MVN6Tm9KU2FrZmUwUXJZU1EwQTR3N1FBVGsvZ05iWUNLNHFBazdiYS9YWWRMMGpsdGdyYmt3MzUrZGw3ODh2NjZYV1hiREFBbWtFUVVHVUZnSDV1My9BVWdpYW1JSUlIVTVpOXFQeEd3NUdMSVl5Tkc2ZERrVzJoSzgzRW9lcVo4RFZSWTJYQ3RuWUluczRvYlh1d1ZQNHRnUEZYeXMwRGk3N28vRlBxK3Y0VzZmdWp2WmpQZHFxN3VST1V0SUlYdzVsUmVUQzJSN3NiV0hRdDJpMVJBTEZxMGIxVjVlV3p4bEMvWDFzRFFIOC9jNGZnL3RtOG12ZE5pVHV0QjRLRkc0VDAwZkNjYVZ6eVM4OEZUY1ZFMUd2OVR4T3JDU01QOVhGYkt4ak9ET2JqOUFtdXY2NG5WQVFBQSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["survived"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"no","2":"281"},{"1":"yes","2":"169"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3Jld19kYXRhICU+JVxuICBncm91cF9ieShzdXJ2aXZlZCkgJT4lXG4gIGNvdW50KClcblxucGFzc2VuZ2VyX2RhdGEgJT4lXG4gIGdyb3VwX2J5KHN1cnZpdmVkKSAlPiVcbiAgY291bnQoKVxuYGBgIn0= -->
+<pre class="r"><code>crew_data %&gt;%
+  group_by(survived) %&gt;%
+  count()
+
+passenger_data %&gt;%
+  group_by(survived) %&gt;%
+  count()</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>no = 157, yes = 48 for crew = 76.5% death rate + 23.5% survival rate</p>
+<p>no = 157, yes = 48 for crew = 76.6% death rate + 23.4% survival rate.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMTU3IC8gMjA1XG5cbmBgYCJ9 -->
@@ -261,33 +263,34 @@ crew_data &lt;- titanic_data %&gt;%
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>no = 281, yes = 169 for passengers = 62.4% death rate + 37.6% survival rate</p>
+<p>no = 281, yes = 169 for passengers = 62.4% death rate + 37.6% survival rate.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMjgxLzQ1MFxuYGBgIn0= -->
-<pre class="r"><code>281/450</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMjgxLzQ1MFxuXG5gYGAifQ== -->
+<pre class="r"><code>281/450
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuNjI0NDQ0NFxuIn0= -->
+<pre><code>[1] 0.6244444</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>You were more probable to die if you were crew.</p>
+<p>You were more 14.1% more probable to die if you were crew.</p>
 <ol style="list-style-type: decimal">
 <li><p>2/3 chance.</p></li>
 <li><p>216</p></li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnJvdyh0aHJlZV9kaWNlX3JvbGxlZClcblxuYGBgIn0= -->
-<pre class="r"><code>nrow(three_dice_rolled)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGhyZWVfZGljZV9yb2xsZWQgPC0gcm9sbGRpZSgzKVxubnJvdyh0aHJlZV9kaWNlX3JvbGxlZClcbmBgYCJ9 -->
+<pre class="r"><code>three_dice_rolled &lt;- rolldie(3)
+nrow(three_dice_rolled)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIxNlxuIn0= -->
-<pre><code>[1] 216</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpgYGB7cn0KbGlicmFyeShwcm9iKQpsaWJyYXJ5KGd0b29scykKbGlicmFyeSh0aWR5dmVyc2UpCgp0aXRhbmljX2RhdGEgPC0gcmVhZF9jc3YoImRhdGEvdGl0YW5pYy5jc3YiKQoKdGl0YW5pY19kYXRhICU+JQogIGRpc3RpbmN0KGNsYXNzKQoKcGFzc2VuZ2VyX2RhdGEgPC0gdGl0YW5pY19kYXRhICU+JQogIGZpbHRlcihjbGFzcyA9PSBjKCIzcmQiLCAiMm5kIiwgIjFzdCIpKQoKY3Jld19kYXRhIDwtIHRpdGFuaWNfZGF0YSAlPiUKICBmaWx0ZXIoY2xhc3MgPT0gYygiZW5naW5lZXJpbmcgY3JldyIsCQkJCiAgICAgICAgICAgICAgICAgICAidmljdHVhbGxpbmcgY3JldyIsCQkJCiAgICAgICAgICAgICAgICAgICAicmVzdGF1cmFudCBzdGFmZiIsCQkJCiAgICAgICAgICAgICAgICAgICAiZGVjayBjcmV3IikpCmBgYAoKCgpgYGB7cn0KY3Jld19kYXRhICU+JQogIGdyb3VwX2J5KHN1cnZpdmVkKSAlPiUKICBjb3VudCgpCgpwYXNzZW5nZXJfZGF0YSAlPiUKICBncm91cF9ieShzdXJ2aXZlZCkgJT4lCiAgY291bnQoKQpgYGAKCm5vID0gMTU3LCB5ZXMgPSA0OCBmb3IgY3JldyA9IDc2LjUlIGRlYXRoIHJhdGUgKyAyMy41JSBzdXJ2aXZhbCByYXRlCmBgYHtyfQoxNTcgLyAyMDUKYGBgCgpubyA9IDI4MSwJeWVzCT0gMTY5CWZvciBwYXNzZW5nZXJzID0gNjIuNCUgZGVhdGggcmF0ZSArIDM3LjYlIHN1cnZpdmFsIHJhdGUKCmBgYHtyfQoyODEvNDUwCmBgYAoKWW91IHdlcmUgbW9yZSBwcm9iYWJsZSB0byBkaWUgaWYgeW91IHdlcmUgY3Jldy4KCjEpIDIvMyBjaGFuY2UuCgoyKSAyMTYKCmBgYHtyfQp0aHJlZV9kaWNlX3JvbGxlZCA8LSByb2xsZGllKDMpCm5yb3codGhyZWVfZGljZV9yb2xsZWQpCmBgYAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpgYGB7cn0KbGlicmFyeShwcm9iKQpsaWJyYXJ5KGd0b29scykKbGlicmFyeSh0aWR5dmVyc2UpCgp0aXRhbmljX2RhdGEgPC0gcmVhZF9jc3YoImRhdGEvdGl0YW5pYy5jc3YiKQoKdGl0YW5pY19kYXRhICU+JQogIGRpc3RpbmN0KGNsYXNzKQoKcGFzc2VuZ2VyX2RhdGEgPC0gdGl0YW5pY19kYXRhICU+JQogIGRwbHlyOjpmaWx0ZXIoY2xhc3MgPT0gYygiM3JkIiwgIjJuZCIsICIxc3QiKSkKCiAgY3Jld19kYXRhIDwtIHRpdGFuaWNfZGF0YSAlPiUKICAgIGRwbHlyOjpmaWx0ZXIoY2xhc3MgPT0gYygiZW5naW5lZXJpbmcgY3JldyIsCiAgICAgICAgICAgICAgICAgICAgICJ2aWN0dWFsbGluZyBjcmV3IiwKICAgICAgICAgICAgICAgICAgICAgInJlc3RhdXJhbnQgc3RhZmYiLAogICAgICAgICAgICAgICAgICAgICAiZGVjayBjcmV3IikpCmBgYAoKCgpgYGB7cn0KY3Jld19kYXRhICU+JQogIGdyb3VwX2J5KHN1cnZpdmVkKSAlPiUKICBjb3VudCgpCgpwYXNzZW5nZXJfZGF0YSAlPiUKICBncm91cF9ieShzdXJ2aXZlZCkgJT4lCiAgY291bnQoKQpgYGAKCm5vID0gMTU3LCB5ZXMgPSA0OCBmb3IgY3JldyA9IDc2LjYlIGRlYXRoIHJhdGUgKyAyMy40JSBzdXJ2aXZhbCByYXRlLgoKYGBge3J9CjE1NyAvIDIwNQpgYGAKCm5vID0gMjgxLAl5ZXMJPSAxNjkJZm9yIHBhc3NlbmdlcnMgPSA2Mi40JSBkZWF0aCByYXRlICsgMzcuNiUgc3Vydml2YWwgcmF0ZS4KCmBgYHtyfQoyODEvNDUwCmBgYAoKWW91IHdlcmUgbW9yZSAxNC4xJSBtb3JlIHByb2JhYmxlIHRvIGRpZSBpZiB5b3Ugd2VyZSBjcmV3LgoKMSkgMi8zIGNoYW5jZS4KCjIpIDIxNgoKYGBge3J9CnRocmVlX2RpY2Vfcm9sbGVkIDwtIHJvbGxkaWUoMykKbnJvdyh0aHJlZV9kaWNlX3JvbGxlZCkKYGBgCgo=</div>
 
 
 
