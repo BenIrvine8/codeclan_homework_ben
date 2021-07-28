@@ -55,22 +55,15 @@ items %>%
 For your top brand, plot the distribution of phone ratings as a probability density, overlaying a fitted normal distribution. Do you think the normal distribution provides a good model of these ratings?<br><br>[**Hint** - you will need to calculate the `mean()` and `sd()` of the ratings to plot the appropriate normal. Alternatively, investigate using the `fitdistr()` function in the `MASS` package]
 
 ```{r}
-samsung <- items %>%
-  filter(brand == "Samsung") %>%
+samsung_ratings <- items %>%
+  dplyr::filter(brand == "Samsung") %>%
   select(rating)
 
 samsung_stats <- items %>%
-  filter(brand == "Samsung") %>%
+  dplyr::filter(brand == "Samsung") %>%
   summarise(count = n(), mean = mean(rating), sd = sd(rating)
   )
-```
 
-<br>
-
-## Question 4
-
-We can be more quantitative in comparing the distribution of top brand ratings with a normal distribution. You calculated the `mean()` and `sd()` of your distribution in an earlier question. Use these values to calculate the *proportions* of ratings within one-, two- and three standard deviations of the mean. Compare these proportions with those you expect for a normal distribution.  
-```{r}
 samsung_ratings %>%
   ggplot(aes(x = rating)) +
   geom_histogram(aes(y = ..density..)) +
@@ -81,6 +74,15 @@ samsung_ratings %>%
     ),
     col = "red"
   )
+```
+
+<br>
+
+## Question 4
+
+We can be more quantitative in comparing the distribution of top brand ratings with a normal distribution. You calculated the `mean()` and `sd()` of your distribution in an earlier question. Use these values to calculate the *proportions* of ratings within one-, two- and three standard deviations of the mean. Compare these proportions with those you expect for a normal distribution.  
+```{r}
+
 ```
 
 <details>
