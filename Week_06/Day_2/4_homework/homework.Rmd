@@ -80,7 +80,7 @@ samsung_ratings %>%
 
 ## Question 4
 
-We can be more quantitative in comparing the distribution of top brand ratings with a normal distribution. You calculated the `mean()` and `sd()` of your distribution in an earlier question. Use these values to calculate the *proportions* of ratings within one-, two- and three standard deviations of the mean. Compare these proportions with those you expect for a normal distribution.  
+We can be more quantitative in comparing the distribution of top brand ratings with a normal distribution. You calculated the `mean()` and `sd()` of your distribution in an earlier question. Use these values to calculate the *proportions* of ratings within one-, two- and three standard deviations of the mean. Compare these proportions with those you expect for a normal distribution.
 ```{r}
 samsung_ratings %>%
   dplyr::filter(rating >= samsung_stats$mean - samsung_stats$sd) %>%
@@ -105,7 +105,8 @@ You can use a `filter()` to get only the ratings within one-, two- and three sta
 
 <details>
 <summary>**Further hint - code to filter within one SD**</summary>
-Here's the code to filter and summarise the proportion of ratings within one standard deviation of the mean.
+Here's the code to filter and summarise the proportion of ratings within one 
+standard deviation of the mean.
 
 ```{r, eval=FALSE}
 samsung_ratings %>%
