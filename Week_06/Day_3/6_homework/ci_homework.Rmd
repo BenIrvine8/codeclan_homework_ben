@@ -29,7 +29,7 @@ population_mean <- house_sales %>%
 bootstrap_1000 <- house_sales %>%
     specify(response = lot_area) %>%
     generate(reps = 1000, type = "bootstrap") %>%
-    calculate(stat = "mean")
+    calculate(stat = "mean") 
 ```
 
 4)
@@ -42,11 +42,15 @@ bootstrap_1000 <- house_sales %>%
 ```{r}
 bootstrap_ci_99 <- bootstrap_1000 %>%
     get_ci(level = 0.99, type = "percentile")
+
+bootstrap_1000 %>%
+  visualise(bins = 30) +
+  shade_ci(endpoints = bootstrap_ci_99)
 ```
 
 6)
 ```{r}
 bootstrap_mean <- bootstrap_1000 %>%
   summarise(mean = mean(stat))
-```
+``` 
 

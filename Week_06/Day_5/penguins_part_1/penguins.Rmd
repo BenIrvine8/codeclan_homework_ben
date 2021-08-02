@@ -1,0 +1,97 @@
+---
+title: "Penguins"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+library(infer)
+library(e1071)
+penguins <- palmerpenguins::penguins 
+```
+
+```{r}
+penguins <- penguins %>%
+  filter(!is.na(bill_length_mm))
+
+penguins %>%
+  ggplot() +
+  aes(x = bill_length_mm) +
+  geom_histogram(col = "white") +
+  facet_wrap(~species)
+
+penguins_adelie <- penguins %>%
+    filter(species == "Adelie")
+
+penguins_gentoo <- penguins %>%
+    filter(species == "Gentoo")
+
+penguins_chinstrap <- penguins %>%
+    filter(species == "Chinstrap")
+```
+
+
+```{r}
+penguins_adelie %>%
+ summarise(mean = mean(bill_length_mm),
+           sd = sd(bill_length_mm),
+           skewness = skewness(bill_length_mm))
+
+penguins_gentoo %>%
+ summarise(mean = mean(bill_length_mm),
+           sd = sd(bill_length_mm),
+           skewness = skewness(bill_length_mm))
+
+penguins_chinstrap %>%
+ summarise(mean = mean(bill_length_mm),
+           sd = sd(bill_length_mm),
+           skewness = skewness(bill_length_mm))
+```
+
+Adelie Penguins have a mean beak length of 38.79, a standard deviation of 2.66 
+and is fairly symettrical.
+
+Gentoo Penguins have a mean beak length of 47.50488, a standard deviation of 
+3.081857 and is skewed to the right.
+
+Chinstrap Penguins have a mean beak length of 48.83382, a standard deviation of 
+3.339256 and is farily symettrical.
+
+
+H0: gentoo bill length = adelaide bill length  alpha = 0.05
+HA: Gentoo bill length > adelaide bill length
+```{r}
+gentoo_adelie <- penguins %>% 
+  filter(species == "Adelie" | species == "Gentoo")
+
+gentoo_adelie %>%
+  ggplot() +
+  aes(y = bill_length_mm, x = species) +
+  geom_boxplot()
+
+null_distribution <- gentoo_adelie %>%
+  specify(bill_length_mm ~ species) %>%
+  hypothesise(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("Gentoo", "Adelie"))
+
+observed_stat <- gentoo_adelie %>%
+  specify(bill_length_mm ~ species) %>%
+  calculate(stat = "diff in means", order = c("Gentoo", "Adelie"))
+
+null_distribution %>%
+  visualise() +
+  shade_p_value(obs_stat = observed_stat, direction =  "right")
+
+p_value <- null_distribution %>%
+  get_p_value(obs_stat = observed_stat, direction = "right")
+```
+
+There is enough at alpha = 0.05 to reject H0, therefore we accept HA
+
+The mean bill length of Gentoo is significantly longer than the mean bill length 
+of Adelie.
+
